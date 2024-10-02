@@ -1,0 +1,23 @@
+Summary of Annotations:
+@OneToOne: Indicates a one-to-one relationship.
+@OneToMany: Indicates a one-to-many relationship.
+@ManyToOne: Indicates the many side of a one-to-many relationship.
+@ManyToMany: Indicates a many-to-many relationship.
+@JoinColumn: Specifies the foreign key column in the database.
+@JoinTable: Used in many-to-many relationships to specify the join table and its columns.
+CascadeType.ALL: This means that all operations (like persist, merge, remove) are cascaded from the parent entity to the child entities.
+@UniqueConstraint prevent duplication
+@Table annotations specifies the table name in the database that this entity is mapped to
+@Entity Marks a class as an entity, meaning it represents a table in the database.
+
+@Column(nullable = false) // means column must always have a value and cannot be left empty. Cause error if empty or no value.
+@Column(nullable = true) // means column can accept NULL values, indicating that it's optional.
+
+4 PRIMARY KEY GENERATION TYPES:
+@GeneratedValue(strategy = GenerationType.AUTO) - used when you want Hibernate to automatically choose the most suitable strategy(sequence, identity and etc) for your database.
+@GeneratedValue(strategy = GenerationType.IDENTITY) - used/relies in databases that support auto-increment columns
+@GeneratedValue(strategy = GenerationType.SEQUENCE) - useful in databases like Oracle, PostgreSQL, or any database that supports sequences.
+@GeneratedValue(strategy = GenerationType.TABLE) -  less common but can be useful for databases that do not support sequences or identity columns.
+
+@CreationTimestamp - Hibernate will automatically set the timestamp when a new record is inserted into the database.
+@UpdateTimestamp - Hibernate will automatically update the timestamp every time the record is modified.
