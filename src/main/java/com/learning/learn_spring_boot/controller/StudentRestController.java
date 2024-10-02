@@ -2,9 +2,9 @@ package com.learning.learn_spring_boot.controller;
 import com.learning.learn_spring_boot.model.Student;
 import com.learning.learn_spring_boot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +24,20 @@ public class StudentRestController {
     public List<Student> getStudent() { // automatically convert the List<Student> into a JSON array. Useful in fetching data in frontend and use axios.
         return studentService.getStudents();
     }
+
+    @PostMapping("/add-student")
+    public ResponseEntity<String> newStudent(@RequestBody Student student) {
+
+        try {
+            studentService.addNewStudent(student);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Student added successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding student: " + e.getMessage());
+        }
+
+    }
+
+
 
 }

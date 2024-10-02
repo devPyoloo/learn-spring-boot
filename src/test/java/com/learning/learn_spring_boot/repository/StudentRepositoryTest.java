@@ -29,7 +29,6 @@ class StudentRepositoryTest {
         //provide value
         Student student = new Student();
         student.setName("Yasmin");
-        student.setAge(22);
         student.setDob(LocalDate.of(2002, Month.FEBRUARY, 2));
         student.setEmail("yasmin@gmail.com");
 
@@ -82,7 +81,7 @@ class StudentRepositoryTest {
     public void findAllMethod() {
         List<Student> students = studentRepository.findAll();
 
-        students.forEach((student) -> System.out.println(student.getName()));
+        students.forEach((student) -> System.out.println(student.getName() + student.getAge()));
     }
 
 
@@ -91,16 +90,14 @@ class StudentRepositoryTest {
 //    @Transactional
     public void saveAllMethod() {
         Student student4 = new Student();
-            student4.setName("Mark Piolo");
-            student4.setAge(22);
+            student4.setName("Mark Piolooooooo");
             student4.setDob(LocalDate.of(2002, Month.FEBRUARY, 4));
-            student4.setEmail("mark@gmail.com");
+            student4.setEmail("markkkkk@gmail.com");
 
         Student student5 = new Student();
-        student5.setName("Lotso Dos");
-        student5.setAge(22);
+        student5.setName("Lotso Dos Pascualllllll");
         student5.setDob(LocalDate.of(2002, Month.FEBRUARY, 2));
-        student5.setEmail("lotsodos@gmail.com");
+        student5.setEmail("lotsodossssss@gmail.com");
 
          studentRepository.saveAll(List.of(student4, student5));
     }

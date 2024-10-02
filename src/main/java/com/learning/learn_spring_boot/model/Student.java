@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 //  Marks a class as an entity, meaning it represents a table in the database.
 @Entity
@@ -24,7 +25,7 @@ public class Student {
 
     @Column(nullable = true) // means column can accept NULL values, indicating that it's optional.
     private String name;
-    private Integer age;
+
     private LocalDate dob;
 
     @CreationTimestamp // will automatically set the timestamp when a new record is inserted into the database.
@@ -43,18 +44,16 @@ public class Student {
 
 
     // Constructor for updating existing student
-    public Student(Long id, String name, Integer age, LocalDate dob, String email) {
+    public Student(Long id, String name, LocalDate dob, String email) {
         this.id = id;
         this.name = name;
-        this.age = age;
         this.dob = dob;
         this.email = email;
     }
 
     // practical for new Student since database auto generate Id (primary key).
-    public Student(String name, Integer age, LocalDate dob, String email) {
+    public Student(String name, LocalDate dob, String email) {
         this.name = name;
-        this.age = age;
         this.dob = dob;
         this.email = email;
     }
@@ -76,11 +75,7 @@ public class Student {
     }
 
     public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public LocalDate getDob() {
@@ -114,7 +109,7 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", age=" + age +
+                ", age=" + getAge() +
                 ", dob=" + dob +
                 ", dateCreated=" + dateCreated +
                 ", lastUpdated=" + lastUpdated +
